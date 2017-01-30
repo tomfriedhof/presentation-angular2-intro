@@ -1,50 +1,333 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/custom.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body style="background-image: url(img/presentation-bg2.svg); background-size: cover">
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1 class="title-slide">Introduction to Angular 2</h1>
+          <p>...and disecting Tour of Heroes</p>
+          <p>
+            <small>Presented by <a href="http://twitter.com/tomfriedhof ">Tom Friedhof</a> </small>
+          </p>
+        </section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+        <section>
+          <h1 style="text-align: left ">Tom Friedhof</h1>
+          <div style="width: 25%; float: left;">
+            <img src="img/tom-friedhof.jpg" class="no-border" />
+          </div>
+          <div style="width: 75%; float: left;">
+            <ul>
+              <li>Senior Software Engineer at <a href="http://activelamp.com">ActiveLAMP</a></li>
+              <li><a href="http://twitter.com/tomfriedhof">@tomfriedhof</a></li>
+              <li><a href="http://twitter.com/activelamp">@activelamp</a></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>We are a Los Angeles based Digital Agency</li>
+              <li>Drupal is our platform of choice.</li>
+              <li>Our agency has been working on the Drupal platform now for about a decade.  We've been part of the community for a while.</li>
+            </ul>
+          </aside>
+        </section>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+        <section>
+          <h2>Subscribe to our YouTube Channel</h2>
+          <p>http://youtube.com/activelamp</p>
+          <img src="img/activelamp-youtube.jpg" class="no-border" style="width: 65%"/>
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+          <aside class="notes">
+            <ul>
+              <li>Go to our YouTube channel right now and subscribe</li>
+              <li>Now go to all your social feeds and tell everyone to subscribe (just kidding) kind of.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h2>What I'll be covering today</h2>
+          <ul>
+            <li class="fragment">Overview of Typescript</li>
+            <li class="fragment">Angular Architecture</li>
+            <li class="fragment">Angular CLI</li>
+            <li class="fragment">Disect Tour of Heroes</li>
+          </ul>
+          <aside class="notes">
+            <ul>
+              <li>This is not a deep dive</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h2>Everything I'm showing today is lifted right out of the docs.</h2>
+          <aside class="notes">
+            <ul>
+              <li>Documentation references are provided for you to review later.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <h1>Typescript</h1>
+            <p class="fragment">TypeScript is a <strong>typed</strong> superset of Javascript that compiles to plain Javascript.</p>
+          </section>
+
+          <section>
+            <h2>What do you get?</h2>
+            <ul>
+              <li class="fragment">Strongly typed variables</li>
+              <li class="fragment">Interfaces</li>
+              <li class="fragment">Classes</li>
+            </ul>
+          </section>
+
+          <section>
+            <h1>Why does this matter?</h1>
+            <p class="fragment">Find out about errors at compile time</p>
+            <h3 class="fragment">rather than runtime</p>
+          </section>
+
+          <section>
+            <h2>Quick Overview of TypeScript</h2>
+            <a href="https://www.typescriptlang.org/docs/tutorial.html">https://www.typescriptlang.org/docs/tutorial.html</a>
+          </section>
+
+          <section>
+            <h3>Typescript is Javascript</h3>
+            <pre><code data-trim contenteditable>
+function greeter(person) {
+  return "Hello, " + person;
+}
+
+var user = "Jane User";
+
+document.body.innerHTML = greeter(user);
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>Strong type parameter</h3>
+            <pre><code data-trim contenteditable>
+function greeter(person: string) {
+  return "Hello, " + person;
+}
+
+var user = {
+  "id": 1,
+  "name": "Jane User",
+};
+
+document.body.innerHTML = greeter(user);
+            </code></pre>
+            <h2 class="fragment">Compile time error!</h2>
+          </section>
+
+          <section>
+            <h3>Define an interface</h3>
+            <pre><code data-trim contenteditable>
+interface Person {
+  id: number;
+  name: string;
+}
+
+function greeter(person: Person) {
+  return "Hello, " + person.name;
+}
+
+var user = {
+  "id": 1,
+  "name": "Jane User",
+};
+
+document.body.innerHTML = greeter(user);
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Specify what the parameter should look like</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Classes</h2>
+            <pre><code data-trim contenteditable>
+interface Person {
+  id: number;
+  name: string;
+  greeter(name: string): void;
+}
+
+class Man implements Person {
+  constructor(public id, public name) {
+    this.id = id;
+    this.name = name;
+  }
+
+  greeter() {
+    return "Hello, " + this.name;
+  }
+}
+
+var user = new Man(1, 'Jake Speed');
+
+document.body.innerHTML = user.greeter();
+            </code></pre>
+          </section>
+
+          <section>
+            <h1>Questions about TypeScript?</h1>
+            <a class="fragment" href="https://www.typescriptlang.org/docs/tutorial.html">https://www.typescriptlang.org/docs/tutorial.html</a>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Angular Architecture</h1>
+          </section>
+          <section>
+            <h2>Component Based Architecture</h2>
+            <img src="img/component-based-architecture.svg" class="no-border" style="box-shadow: none"/>
+          </section>
+          <section>
+            <p>A <em><strong>component</strong></em> is the combination of an <em>HTML template</em> and a component <em>class</em> that controls a portion of the screen.</p>
+            <pre class="fragment"><code data-trim contenteditable>
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  template: `<h1>Hello {{name}}</h1>`
+})
+
+export class AppComponent {
+  name = 'Angular';
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Let's create this app.</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Angular CLI</h1>
+            <a href="https://angular.io/docs/ts/latest/cli-quickstart.html">https://angular.io/docs/ts/latest/cli-quickstart.html</a>
+          </section>
+
+          <section>
+
+            <h2>3 steps to try Angular</h2>
+            <ol>
+              <li class="fragment">
+                <p>Install the CLI tool</p>
+                <pre style="width: 190%; margin-left: -100px"><code data-trim contenteditable>
+  npm install -g angular-cli
+                </code></pre>
+              </li>
+              <li class="fragment">
+                <p>Create the project</p>
+                <pre style="width: 190%; margin-left: -100px"><code data-trim contenteditable>
+  ng new my-app
+                </code></pre>
+              </li>
+              <li class="fragment">
+                <p>Serve the app</p>
+                <pre style="width: 190%; margin-left: -100px"><code data-trim contenteditable>
+  cd my-app
+  ng serve
+                </code></pre>
+              </li>
+            </ol>
+          </section>
+          <section>
+            <h1>Demo</h1>
+            <p>(Angular CLI)</p>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h1>Tour of Heroes</h1>
+            <a href="https://angular.io/docs/ts/latest/tutorial/">https://angular.io/docs/ts/latest/tutorial/</a>
+          </section>
+          <section>
+            <h2>Who has gone through the Tour of Heroes?</h2>
+          </section>
+          <section>
+            <img src="img/tour-of-heroes.png" class="no-border" style="width: 85%; box-shadow: none"/>
+            <aside class="notes">
+              <ul>
+                <li>This is great documentation for learning most of what Angular has to offer.</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h1>Lets disect the app together</h1>
+            <aside class="notes">
+              <ul>
+                <li>This is an informal demo.</li>
+                <li>Ask questions, this part of the presentation is about collaborating and figuring stuff out together.</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section style="text-align: left;"  data-background-video="img/Website-Loop.mov" data-background-video-loop>
+					<div style="width: 60%; float: left">
+            <br/ ><br />
+						<h2>Questions?</h2>
+						<p>Send me an email:</p>
+						<em>tom@activelamp.com</em>
+					</div>
+					<div style="width: 40%; float: left">
+						<img src="img/activelamp_square_logo.png" style="border: none; box-shadow: none" />
+					</div>
+          <h1 style="text-align: center">We're Hiring</h1>
+				</section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>

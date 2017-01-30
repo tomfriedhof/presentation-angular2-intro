@@ -1166,7 +1166,6 @@ body {
 .reveal .overlay .viewport {
   position: absolute;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   top: 40px;
@@ -1363,3 +1362,26 @@ body {
 
 .zoomed .reveal .roll span:after {
   visibility: hidden; }
+
+/*********************************************
+ * CUSTOM STUFF
+ *********************************************/
+.reveal h1.title-slide {
+  font-size: 3.1em; }
+
+.reveal .no-border {
+  border: none; }
+
+.reveal .youtube-link {
+  position: absolute;
+  top: 70px;
+  font-size: 1.4em;
+  left: 140px; }
+
+.reveal .vertical-footnote {
+  position: absolute;
+  top: 350px;
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+  left: -400px;
+  font-size: 0.6em; }
